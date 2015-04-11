@@ -371,6 +371,12 @@ if(WIN32)
     endif(WINXP_SUPPORT)
 endif()
 
+option(ENABLE_LSMASH "Enable L-SMASH muxer" OFF)
+if(ENABLE_LSMASH)
+    add_definitions(-DENABLE_LSMASH)
+    list(APPEND PLATFORM_LIBS lsmash)
+endif(ENABLE_LSMASH)
+
 include(version) # determine X265_VERSION and X265_LATEST_TAG
 include_directories(. common encoder "${PROJECT_BINARY_DIR}")
 
@@ -539,6 +545,7 @@ if(ENABLE_CLI)
     file(GLOB InputFiles input/input.cpp input/yuv.cpp input/y4m.cpp input/*.h)
     file(GLOB OutputFiles output/output.cpp output/reconplay.cpp output/*.h
                           output/yuv.cpp output/y4m.cpp # recon
+                          output/mp4.cpp
                           output/raw.cpp)               # muxers
     source_group(input FILES ${InputFiles})
     source_group(output FILES ${OutputFiles})
