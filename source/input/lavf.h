@@ -65,6 +65,10 @@ public:
     {
         return "lavf";
     }
+
+    int getWidth() const                          { return _info.width; }
+
+    int getHeight() const                         { return _info.height; }
 };
 }
 
