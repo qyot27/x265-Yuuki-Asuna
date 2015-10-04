@@ -377,6 +377,11 @@ if(ENABLE_LSMASH)
     list(APPEND PLATFORM_LIBS lsmash)
 endif(ENABLE_LSMASH)
 
+option(ENABLE_MKV "Enable Haali Matroska muxer" OFF)
+if(ENABLE_MKV)
+    add_definitions(-DENABLE_MKV)
+endif(ENABLE_MKV)
+
 include(version) # determine X265_VERSION and X265_LATEST_TAG
 include_directories(. common encoder "${PROJECT_BINARY_DIR}")
 
@@ -546,6 +551,7 @@ if(ENABLE_CLI)
     file(GLOB OutputFiles output/output.cpp output/reconplay.cpp output/*.h
                           output/yuv.cpp output/y4m.cpp # recon
                           output/mp4.cpp
+                          output/mkv.cpp output/matroska_ebml.cpp
                           output/raw.cpp)               # muxers
     source_group(input FILES ${InputFiles})
     source_group(output FILES ${OutputFiles})
